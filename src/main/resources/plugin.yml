@@ -1,0 +1,7 @@
+name: Minecraft Spigot User Verifier
+version: ${project.version}
+main: de.kevtv.kevin.minecraft_spigot_user_verifier.Main
+api-version: 1.13
+authors: [KevTVKevin]
+description: Ein Verifaction System für Teamspeak Users über Minecraft
+website: http://KevTV.de

@@ -8,8 +8,11 @@ website: http://KevTV.de
 
 commands:
   checkConnection:
+    description: checks Connection
     usage: /checkConnection
   setupConnection:
+    description: setup Connection
     usage: /setupConnection
   removeConnection:
+    description: remove Connction
     usage: /removeConnection

@@ -1,13 +1,11 @@
 package de.kevtv.kevin.minecraft_spigot_user_verifier.Data;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class MySQL {
 
-    public static Connection connection;
+    private static Connection connection;
 
     public static void connectToMySQL() {
         try {
@@ -19,7 +17,31 @@ public class MySQL {
     }
 
     public static void setupMySQLTables() {
-        updateMySQL("CREATE TABLE IF NOT EXISTS " + Configs.getMySQLData("prefix") + "verify(id int(11) NOT NULL AUTO_INCREMENT, minecraft_uuid varchar(100) NOT NULL, ts_uuid varchar(100) NOT NULL, verification_code varchar(100) NOT NULL, verified int(11) NOT NULL, primary key (id))");
+        updateMySQL("CREATE TABLE IF NOT EXISTS " + Configs.getMySQLData("prefix") + "verify(id int(11) NOT NULL AUTO_INCREMENT, minecraft_uuid varchar(255) NOT NULL, ts_uuid varchar(255) NOT NULL, verification_code varchar(255) NOT NULL, verified int(11) NOT NULL, primary key (id))");
+    }
+
+    public static void insertValuesToTable(String minecraftUUID, String tsUUID, String verificationCode) {
+        updateMySQL("INSERT INTO " + Configs.getMySQLData("prefix") + "verify(minecraft_uuid, ts_uuid, verification_code, verified) VALUES ('" + minecraftUUID + "','" + tsUUID + "','" + verificationCode + "','0')");
+    }
+
+    public static ArrayList getColumnValues(String column) {
+        ArrayList<String> minecraft_uuids = new ArrayList<>();
+
+        try {
+            String query = "SELECT " + column + " FROM " + Configs.getMySQLData("prefix") + "verify";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                minecraft_uuids.add(resultSet.getString(column));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            disconnectMySQL();
+            connectToMySQL();
+        }
+
+        return minecraft_uuids;
     }
 
     public static void updateMySQL(String query) {

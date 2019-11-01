@@ -2,9 +2,9 @@ package de.kevtv.kevin.minecraft_spigot_user_verifier;
 
 import de.kevtv.kevin.minecraft_spigot_user_verifier.Data.Configs;
 import de.kevtv.kevin.minecraft_spigot_user_verifier.Data.MySQL;
-import de.kevtv.kevin.minecraft_spigot_user_verifier.commands.CheckConnectionCommand;
-import de.kevtv.kevin.minecraft_spigot_user_verifier.commands.RemoveConnectionCommand;
-import de.kevtv.kevin.minecraft_spigot_user_verifier.commands.SetupConnectionCommand;
+import de.kevtv.kevin.minecraft_spigot_user_verifier.Commands.CheckConnectionCommand;
+import de.kevtv.kevin.minecraft_spigot_user_verifier.Commands.RemoveConnectionCommand;
+import de.kevtv.kevin.minecraft_spigot_user_verifier.Commands.SetupConnectionCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;

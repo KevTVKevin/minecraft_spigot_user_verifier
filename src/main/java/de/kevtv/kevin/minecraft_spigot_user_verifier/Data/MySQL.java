@@ -24,6 +24,27 @@ public class MySQL {
         updateMySQL("INSERT INTO " + Configs.getMySQLData("prefix") + "verify(minecraft_uuid, ts_uuid, verification_code, verified) VALUES ('" + minecraftUUID + "','" + tsUUID + "','" + verificationCode + "','0')");
     }
 
+    public static String getSpecificValue(String selectedColumn, String column, String columnValue) {
+        String value = "";
+        try {
+            String query = "SELECT " + selectedColumn + " FROM " + Configs.getMySQLData("prefix") + "verify WHERE " + column + " = '" + columnValue + "'";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                value = resultSet.getString(selectedColumn);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            disconnectMySQL();
+            connectToMySQL();
+        }
+
+        return value;
+
+    }
+
     public static ArrayList getColumnValues(String column) {
         ArrayList<String> minecraft_uuids = new ArrayList<>();
 

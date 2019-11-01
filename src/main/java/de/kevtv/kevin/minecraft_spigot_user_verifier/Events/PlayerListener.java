@@ -18,7 +18,7 @@ public class PlayerListener implements Listener {
 
         switch (playerStatus) {
             case 0: player.sendMessage("Du bist noch nicht verifiziert!"); break;
-            case 1: player.sendMessage("Deine Verifizierung ist noch nicht abgeschlossen!"); break;
+            case 1: player.sendMessage("Deine Verifizierung ist noch nicht abgeschlossen! Dein Verifizierungsschlüssel ist: " + getVerificationKey(player)); break;
         }
 
     }
@@ -33,6 +33,11 @@ public class PlayerListener implements Listener {
             return 2;
         }
         return 0;
+    }
+
+    private String getVerificationKey(Player player) {
+        UUID playerUUID = player.getUniqueId();
+        return MySQL.getSpecificValue("verification_code", "minecraft_uuid", playerUUID.toString());
     }
 
 }

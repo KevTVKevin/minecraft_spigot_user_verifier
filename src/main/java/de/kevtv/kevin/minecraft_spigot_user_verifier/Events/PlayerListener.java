@@ -27,7 +27,7 @@ public class PlayerListener implements Listener {
         UUID playerUUID = player.getUniqueId();
 
         if(MySQL.getColumnValues("minecraft_uuid").contains(playerUUID.toString())) {
-            if(MySQL.getSpecificValue("verified", "minecraft_uuid", playerUUID.toString()).equals("0")) {
+            if(MySQL.getSpecificValue("verified", "minecraft_uuid", playerUUID.toString()).equals("1")) {
                 return 1;
             }
             return 2;

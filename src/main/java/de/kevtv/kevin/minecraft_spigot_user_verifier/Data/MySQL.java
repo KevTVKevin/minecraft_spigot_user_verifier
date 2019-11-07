@@ -24,6 +24,10 @@ public class MySQL {
         updateMySQL("INSERT INTO " + Configs.getMySQLData("prefix") + "verify(minecraft_uuid, ts_uuid, verification_code, verified) VALUES ('" + minecraftUUID + "','" + tsUUID + "','" + verificationCode + "','0')");
     }
 
+    public static void updateTable(String minecraftUUID) {
+        updateMySQL("UPDATE " + Configs.getMySQLData("prefix") + "verify SET verified=3 WHERE minecraft_uuid = '" + minecraftUUID + "'");
+    }
+
     public static String getSpecificValue(String selectedColumn, String column, String columnValue) {
         String value = "";
         try {

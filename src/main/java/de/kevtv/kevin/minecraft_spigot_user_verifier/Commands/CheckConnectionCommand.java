@@ -16,7 +16,7 @@ public class CheckConnectionCommand implements CommandExecutor {
             Player player = (Player) sender;
             UUID playerUUID = player.getUniqueId();
             if(MySQL.getColumnValues("minecraft_uuid").contains(playerUUID.toString())) {
-                sender.sendMessage("Du bist momentan mit der Teamspeak UUID: " + MySQL.getColumnValues("ts_uuid") + " verbunden!");
+                sender.sendMessage("Du bist momentan mit der Teamspeak UUID: " + MySQL.getSpecificValue("ts_uuid", "minecraft_uuid", playerUUID.toString()) + " verbunden!");
             } else {
                 sender.sendMessage("Du bist nicht verifiziert!");
             }
